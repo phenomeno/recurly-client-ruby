@@ -1,7 +1,9 @@
 module Recurly
   class Railtie < Rails::Railtie
     initializer :recurly_set_logger do
-      Recurly.logger = Rails.logger
+      unless Rails.env == "production"
+        Recurly.logger = Rails.logger
+      end
     end
 
     initializer :recurly_set_accept_language do
